@@ -4,6 +4,8 @@ TÄLLÄ HETKELLÄ tietokantayhteys toimii, mikään muu oikeastaan ei. Lisäpake
 An Error Was Encountered
 Non-existent class: Ion_auth
 
+PHP:n versiolla 8.1.17 Fuel CMS toimii, ei tue uudempaa.
+
 ----
 
 Oletuksena tietokannan nimi on vrlv3, serveri localhost ja user root ilman salasanaa. 
