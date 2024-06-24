@@ -1,19 +1,24 @@
 # vrl_uusi
-Oletuksena tietokannan nimi on vrlv3, serveri localhost ja user root ilman salasanaa. Kopioi tiedosto fuel/application/config/database_skeleton.php samaan kansioon ja nimeä se pelkäksi database.php:ksi. Sitten muokkaa se vastaamaan omaa konfiguraatiotasi, mutta ÄLÄ COMMITOI TÄTÄ TIEDOSTOA, vaan laita se .gitignoreen vaikka tortoisegitin avulla!
+TÄLLÄ HETKELLÄ tietokantayhteys toimii, mikään muu oikeastaan ei. Lisäpaketeista asennettuna IonAuth, mutta valittaa:
 
-Oletuksena salausavaimeksi on asetettu $config['encryption_key'] = 'test_test_test_test'; Kopioi tiedosto fuel/application/config/config_skeleton.php samaan kansioon ja nimeä se pelkäksi config.php:ksi. Sitten voit halutessasi muokata sen vastaamaan omaa konfiguraatiotasi, mutta ÄLÄ COMMITOI TÄTÄ TIEDOSTOA, vaan laita se .gitignoreen vaikka tortoisegitin avulla!
+An Error Was Encountered
+Non-existent class: Ion_auth
 
-Kuvat, javascriptit yms. sijoitetaan assets kansioon
+----
 
-Alkuunsa luo tietokanta (vrlv3), ja aja sinne database kansion .sql tiedostot seuraavassa järjestyksessä (älä aja muita tiedostoja): fuel_schema.sql
+Oletuksena tietokannan nimi on vrlv3, serveri localhost ja user root ilman salasanaa. 
 
-listat_data_schema.sql
+Oletuksena salausavaimeksi on asetettu `$config['encryption_key'] = 'test_test_test_test';`
 
-tunnukset_schema.sql
+Kuvat, javascriptit yms. sijoitetaan assets-kansioon, kaikki sivut `fuel/modules/fuel/views` -kansioon
 
-from_scratch_schema.sql
+Alkuunsa luo tietokanta (vrlv3), ja aja sinne database kansion .sql tiedostot seuraavassa järjestyksessä (älä aja muita tiedostoja): 
 
-from_scratch_insert.sql
+- fuel_schema.sql
+- listat_data_schema.sql
+- tunnukset_schema.sql
+- from_scratch_schema.sql
+- from_scratch_insert.sql
 
 # Pyörittäminen lokaalisti Dockerilla
 Sovellus on kontitettu ja käynnistettävissä docker composella. Paikallisissa `database.php` ja `config.php` tiedostoissa tarvii olla tällaiset arvot:
