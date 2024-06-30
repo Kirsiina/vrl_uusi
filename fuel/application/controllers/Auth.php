@@ -2,16 +2,47 @@
 
 /**
  * Class Auth
- * @property Ion_auth|Ion_auth_model $ion_auth        The ION Auth spark
- * @property CI_Form_validation      $form_validation The form validation library
+ *
+ * @property Ion_auth|Ion_auth_model $ion_auth      The ION Auth spark
+ * @package  CodeIgniter-Ion-Auth
+ * @author   Ben Edmunds <ben.edmunds@gmail.com>
+ * @author   Benoit VRIGNAUD <benoit.vrignaud@zaclys.net>
+ * @license  https://opensource.org/licenses/MIT	MIT License
  */
 class Auth extends CI_Controller
 {
+	/**
+	 *
+	 * @var array
+	 */
 	public $data = [];
+
+	/**
+	 * Configuration
+	 *
+	 * @var \IonAuth\Config\IonAuth
+	 */
+	protected $configIonAuth;
+
+	/**
+	 * IonAuth library
+	 *
+	 * @var \IonAuth\Libraries\IonAuth
+	 */
+	protected $ionAuth;
+
+	/**
+	 * Constructor
+	 *
+	 * @return void
+	 */
 
 	public function __construct()
 	{
 		parent::__construct();
+		//$this->ionAuth    = new \IonAuth\Libraries\IonAuth();
+		//$this->validation = \Config\Services::validation();
+		//$this->configIonAuth = config('IonAuth');
 		$this->load->database();
 		$this->load->library(['ion_auth', 'form_validation']);
 		$this->load->helper(['url', 'language', 'form']);
