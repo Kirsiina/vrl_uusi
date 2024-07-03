@@ -12,27 +12,33 @@ Toimintaan on helppo tulla mukaan. Ensikertalaisen kannattaa aloittaa <a href="<
 
 </p>
 <h2>Ylläpito</h2>
-<p>VRL:n ylläpito on täysin harrastajien omissa käsissä. Sivuston toiminnasta ovat vastuussa <?php foreach ($admins as $key=>$admin){
-   echo '<strong>'.$admin['nimimerkki'] . "</strong> (VRL-". $admin['tunnus'] . ")";
-   
-   if(sizeof($admins) == 1){
-      echo ', ';
-   }
-   else if(sizeof($admins) - 2 == $key){
-      echo ' ja ';
-   }
-   else {
-      echo ', ';
-   }
+<?php if (isset($admins) && !empty($admins)): ?>
+<p>VRL:n ylläpito on täysin harrastajien omissa käsissä. Sivuston toiminnasta ovat vastuussa 
+<?php 
+foreach ($admins as $key => $admin) {
+    echo '<strong>' . $admin['nimimerkki'] . "</strong> (VRL-" . $admin['tunnus'] . ")";
+    if ($key < sizeof($admins) - 2) {
+        echo ', ';
+    } else if ($key == sizeof($admins) - 2) {
+        echo ' ja ';
+    }
 }
-   
-   ?> ja liiton pyörittämisessä apuna toimii kymmeniä vapaaehtoistyöntekijöitä monissa eri tehtävissä! Mikäli olet kiinnostunut auttamaan liiton pyörittämisessä, älä epäröi ottaa yhteyttä! Yhteystietosivulta löydät kaikkien osa-alueiden vastuuhenkilöiden nimet ja yhteystiedot.</p>
-
+?> 
+ja liiton pyörittämisessä apuna toimii kymmeniä vapaaehtoistyöntekijöitä monissa eri tehtävissä! Mikäli olet kiinnostunut auttamaan liiton pyörittämisessä, älä epäröi ottaa yhteyttä! Yhteystietosivulta löydät kaikkien osa-alueiden vastuuhenkilöiden nimet ja yhteystiedot.</p>
+<?php else: ?>
+<p>Ylläpitäjiä ei löytynyt.</p>
+<?php endif; ?>
 
 <h2>Tiedotukset</h2>
-<?php foreach ($tiedotukset as $tiedotus){
-   echo date( "d.m.Y", strtotime($tiedotus['aika'])) ." - <a href='". site_url("liitto/tiedotus/".$tiedotus['tid']) . "'>". $tiedotus['otsikko'] . "</a><br>";  
-    
-}?>
+<?php if (isset($tiedotukset) && !empty($tiedotukset)): ?>
+<?php 
+foreach ($tiedotukset as $tiedotus) {
+    echo date("d.m.Y", strtotime($tiedotus['aika'])) . " - <a href='" . site_url("liitto/tiedotus/" . $tiedotus['tid']) . "'>" . $tiedotus['otsikko'] . "</a><br>";  
+}
+?>
+<a href="<?php echo site_url("liitto/tiedotukset")?>">Lue lisää tiedotuksia</a>.
+<?php else: ?>
+<p>Tiedotuksia ei löytynyt.</p>
+<?php endif; ?>
 
 <a href="<?php echo site_url("liitto/tiedotukset")?>">Lue lisää tiedotuksia</a>.

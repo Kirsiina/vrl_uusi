@@ -1,8 +1,41 @@
 <?php 
+
+function fetchApiData($url) {
+    $ch = curl_init();
+
+    // Asetetaan cURL-asetukset
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 5); // Asetetaan kokonaisaikakatkaisu 5 sekunniksi
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5); // Asetetaan yhdistämisen aikakatkaisu 5 sekunniksi
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Seurataan uudelleenohjauksia
+    curl_setopt($ch, CURLOPT_FAILONERROR, true); // Palauttaa virheen HTTP-koodilla 4xx tai 5xx
+    curl_setopt($ch, CURLOPT_NOSIGNAL, 1); // Lisätty cURL-signaalien estämiseksi aikakatkaisun vuoksi
+
+    $output = curl_exec($ch);
+
+    // Tarkistetaan, tapahtuiko virhe
+    if (curl_errno($ch)) {
+        $error_message = curl_error($ch);
+        curl_close($ch);
+        return ['error' => 1, 'error_message' => $error_message];
+    }
+
+    // Tarkistetaan, jos palautusarvo on false
+    if ($output === false) {
+        $error_message = curl_error($ch);
+        curl_close($ch);
+        return ['error' => 1, 'error_message' => $error_message];
+    }
+
+    curl_close($ch);
+
+    return json_decode($output, true);
+}
 //Muokkaa tähän hevosesi VH-tunnus
 $vh = 'VH03-028-8756';
 $url = 'http://virtuaalihevoset.net/rajapinta/porrastetut/'.$vh;
-$obj = json_decode(file_get_contents($url), true);
+$obj = fetchApiData($url);
 
 if(isset($obj['error']) && $obj['error'] == 0){        
     $data = $obj['porrastetut'];
@@ -124,10 +157,8 @@ if(isset($obj['error']) && $obj['error'] == 0){
     
     
     
-}else if($obj['error'] == 1){
-    echo $obj['error_description'];
-}else {
-    echo "Tapahtui odottamaton virhe!";
+} else {
+    echo '<p>Tapahtui virhe tietoja haettaessa.</p>';
 }
 
 ?>
