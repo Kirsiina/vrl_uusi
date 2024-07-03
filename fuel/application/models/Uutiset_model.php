@@ -157,22 +157,21 @@ class Uutiset_model extends Base_module_model
     
     function hae_tiedotukset($limit, $offset, $y = -1, $m = -1)
     {
-        $json = array();
         $this->db->select("tid, otsikko, teksti, lahettaja, aika, nimimerkki as lahettaja_nick");        
-        if($y > 0){
+        if($y > 0) {
             $this->db->where('YEAR(aika)', $y); 
-            if($m > 0){
+            if($m > 0) {
                 $this->db->where('MONTH(aika)', $m); 
             }
         }
         $this->db->join('vrlv3_tunnukset', 'vrlv3_tunnukset.tunnus = vrlv3_tiedotukset.lahettaja');
         $this->db->order_by("aika", "desc");
-        if($limit > 0){
+        if($limit > 0) {
             $this->db->limit($limit, $offset);
         }
         $query = $this->db->get('vrlv3_tiedotukset');
         
-        return  $this->_kasittele_tiedotukset($query->result_array());
+        return $this->_kasittele_tiedotukset($query->result_array());
         
     }
     
