@@ -1,10 +1,6 @@
 # vrl_uusi
-TÄLLÄ HETKELLÄ tietokantayhteys toimii, mikään muu oikeastaan ei. Lisäpaketeista asennettuna IonAuth, mutta valittaa:
 
-An Error Was Encountered
-Non-existent class: Ion_auth
-
-PHP:n versiolla 8.1.17 Fuel CMS toimii, ei tue uudempaa.
+Fuel CMS toimii PHP:n versiolla 8.1.17, ei tue uudempaa. Jos teet muutoksia config.php tai env-tiedostoon, ÄLÄ commitoi niitä tänne. Pyörii Dockerilla, jos käytät XAMPPia tai vastaavaa, vaihda env-tiedostoon ja configiin kansion nimi localhostin perään, tai luo uusi virtualhost esimerkiksi [tällä ohjeella](https://stackoverflow.com/a/27754990)
 
 ----
 
